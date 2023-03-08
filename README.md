@@ -31,7 +31,7 @@ Since Flutter doesn't currently fully support SPM dependency, you'll need to man
 
 More info here :   
 
-[xcframework Linking](/xcframework_linking.md)
+[xcframework Linking](https://github.com/CommandersAct/TCMobileDemo-flutter/blob/master/xcframework_linking.md)
 
 ### Android : 
 
