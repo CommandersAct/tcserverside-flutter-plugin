@@ -1,0 +1,43 @@
+group 'com.tagcommander.tc_serverside_plugin'
+version '1.0'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+    }
+}
+
+dependencies{
+    //Commanders Act SDK dependencies
+    api 'com.tagcommander.lib:core:5.+'
+    api 'com.tagcommander.lib:ServerSide:5.+'
+    api 'com.google.code.gson:gson:2.10.1'
+}

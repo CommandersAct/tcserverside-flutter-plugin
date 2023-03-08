@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - tc_serverside_plugin (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - tc_serverside_plugin (from `.symlinks/plugins/tc_serverside_plugin/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  tc_serverside_plugin:
+    :path: ".symlinks/plugins/tc_serverside_plugin/ios"
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  tc_serverside_plugin: 7d3fabc06f2b9fda82063f3e4fa6797bc55e70ff
+
+PODFILE CHECKSUM: 663715e941f9adb426e33bf9376914006f9ea95b
+
+COCOAPODS: 1.11.3
