@@ -31,7 +31,7 @@ Use branch `with_idfa` if you need IDFA in your ios hits.
 ```
 dependencies:
 
-  tc_consent_plugin:
+  tc_serverside_plugin:
     git:
       url: https://github.com/CommandersAct/tcserverside-plugin.git
       ref: with_idfa
