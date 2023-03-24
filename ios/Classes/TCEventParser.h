@@ -7,6 +7,7 @@
 
 #ifndef TCEventParser_h
 #define TCEventParser_h
+#import <TCCore/TCLogger.h>
 #if __has_include(<TCServerSide_noIDFA/ServerSide.h>)
 #import <TCServerSide_noIDFA/ServerSide.h>
 #import <TCServerSide_noIDFA/TCAddShippingInfoEvent.h>
@@ -33,6 +34,7 @@
 #import <TCServerSide_noIDFA/TCItem.h>
 #import <TCServerSide_noIDFA/TCProduct.h>
 #import <TCServerSide_noIDFA/TCDevice.h>
+#import <TCServerSide_noIDFA/TCApp.h>
 #else
 #import <TCServerSide/ServerSide.h>
 #import <TCServerSide/TCAddShippingInfoEvent.h>
@@ -59,6 +61,7 @@
 #import <TCServerSide/TCCustomEvent.h>
 #import <TCServerSide/TCProduct.h>
 #import <TCServerSide/TCDevice.h>
+#import <TCServerSide/TCApp.h>
 #endif
 
 @interface TCEventParser : NSObject
@@ -66,6 +69,8 @@
 @property (nonatomic, retain) NSArray* ECOMMERCE_EVENTS;
 
 - (TCEvent *) parseEvent: (NSMutableDictionary *) eventDict withName: eventName;
+- (void) setValue: (id) value forProperty: (NSString *) property forCalss: (NSString *) className;
+- (void) setAdditionalProperty: (id) value forKey: (NSString *) key forCalss: (NSString *) className type: (NSString *) method;
 - (void) setItems: (NSMutableDictionary *) eventDict forEvent: (TCECommerceEvent *) event;
 - (void) setProduct: (NSMutableDictionary *) itemDict forTCItem: (TCItem *) item;
 

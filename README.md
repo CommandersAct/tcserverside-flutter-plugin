@@ -11,9 +11,9 @@ While we have made every effort to ensure the quality and stability of this beta
 
 It is important to have a look on both [Android](https://github.com/CommandersAct/AndroidV5/tree/master/TCServerSide) and [IOS](https://github.com/CommandersAct/iosv5/tree/master/TCServerSide) documentation to understand the basic functionning of the library. 
 
-## Setup 
+## Installation 
 
-We'll be releasing this plugin on pub.dev once we finish our beta phase. as for now, you'll need to have a git plugin dependency. 
+We'll be releasing this plugin on pub.dev once beta phase is terminated. as for now, you'll need to set a git dependency. 
 
 On your pubspec.yaml, set : 
 
@@ -26,20 +26,24 @@ dependencies:
       ref: master
 ```
 
-### iOS :
-Since Flutter doesn't currently fully support SPM dependency, you'll need to manually link our TCCore.xcframework to both your `tc_serverside_plugin` target (and any other tc_* target that you are using) & your `Runner` target on xcode. 
+Use branch `with_idfa` if you need IDFA in your ios hits.
+
+```
+dependencies:
+
+  tc_consent_plugin:
+    git:
+      url: https://github.com/CommandersAct/tcserverside-plugin.git
+      ref: with_idfa
+```
+
+### [iOS only] manually linking TCCore :
+
+Flutter doesn't currently fully support SPM dependency, you'll need to manually link our TCCore.xcframework to both your `tc_consent_plugin` target (and any other tc_* plugin target that you are using) & your `Runner` target on xcode. 
 
 More info here :   
 
 [xcframework Linking](https://github.com/CommandersAct/TCMobileDemo-flutter/blob/master/xcframework_linking.md)
-
-### Android : 
-
-Make sure you're API 21 or above on your `app/build.gradle` file.  
-```
-     minSdkVersion 21
- 
-```
 
 ## Usage : 
 
@@ -47,7 +51,7 @@ Simillar to Android and iOS SDKs, you'll need to create a ServerSide() instance 
 
 As for TCDevice and other classes, porting them is currently in development, this repo will be updated ASAP.
 
-Please have a look on `lib/tc_serverside.dart` for more info. 
+Please have a look on `lib/tc_serverside.dart`  & `example/lib/main.dart` for more info. 
 
 An example code will look like : 
 
@@ -57,5 +61,4 @@ An example code will look like :
   serverside.execute(TCPageViewEvent());
 ```
 
-A full example is available on [Here](https://github.com/CommandersAct/TCMobileDemo-flutter).
-
+A full example is available [Here](https://github.com/CommandersAct/TCMobileDemo-flutter) folder.

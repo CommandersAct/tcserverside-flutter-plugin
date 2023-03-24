@@ -104,32 +104,56 @@
     return event;
 }
 
-- (void) setAdditionalProperty: (id) value forKey: (NSString *) key forCalss: (NSString *) className methodName: (NSString *) method;
+- (void) setValue: (id) value forProperty: (NSString *) property forCalss: (NSString *) className
 {
-    if([className isEqualToString: @"TCDevice"])
+    if (value && ![value isEqual: [NSNull null]])
     {
-        if (value && ![value isEqual: [NSNull null]])
+        if([className isEqualToString: @"TCDevice"])
         {
-            if ([method isEqualToString: @"addAdditionalProperty"])
-            {
-                [[TCDevice sharedInstance] addAdditionalProperty: key withStringValue: value];
-            }
-            else if ([method isEqualToString: @"addAdditionalPropertyWithMapValue"])
-            {
-                [[TCDevice sharedInstance] addAdditionalProperty: key withDictValue: value];
-            }
-            else if ([method isEqualToString: @"addAdditionalPropertyWithBooleanValue"])
-            {
-                [[TCDevice sharedInstance] addAdditionalProperty: key withBoolValue: [value boolValue]];
-            }
-            else if ([method isEqualToString: @"addAdditionalPropertyWithDoubleValue"] || [method isEqualToString: @"addAdditionalPropertyWithIntValue"])
-            {
-                [[TCDevice sharedInstance] addAdditionalProperty: key withNumberValue: value];
-            }
-            else if ([method isEqualToString: @"addAdditionalPropertyWithListValue"])
-            {
-                [[TCDevice sharedInstance] addAdditionalProperty: key withArrayValue: value];
-            }
+            [[TCDevice sharedInstance] setValue: value forKey: property];
+        }
+        else if ([className isEqualToString: @"TCApp"])
+        {
+            [[TCApp sharedInstance] setValue: value forKey: property];
+        }
+    }
+}
+
+- (void) setAdditionalProperty: (id) value forKey: (NSString *) key forCalss: (NSString *) className type: (NSString *) type;
+{
+
+    if (value && ![value isEqual: [NSNull null]])
+    {
+        TCAdditionalProperties *obj;
+        
+        if([className isEqualToString: @"TCDevice"])
+        {
+            obj = [TCDevice sharedInstance];
+        }
+        else if ([className isEqualToString: @"TCApp"])
+        {
+            obj = [TCApp sharedInstance];
+        }
+
+        if ([type isEqualToString: @"string"])
+        {
+            [obj addAdditionalProperty: key withStringValue: value];
+        }
+        else if ([type isEqualToString: @"map"])
+        {
+            [obj addAdditionalProperty: key withDictValue: value];
+        }
+        else if ([type isEqualToString: @"bool"])
+        {
+            [obj addAdditionalProperty: key withBoolValue: [value boolValue]];
+        }
+        else if ([type isEqualToString: @"double"] || [type isEqualToString: @"int"])
+        {
+            [obj addAdditionalProperty: key withNumberValue: value];
+        }
+        else if ([type isEqualToString: @"list"])
+        {
+            [obj addAdditionalProperty: key withArrayValue: value];
         }
     }
 }
@@ -142,7 +166,15 @@
     {
         if (![[eventDict objectForKey: key] isEqual: [NSNull null]])
         {
-            [event setValue: [eventDict objectForKey: key] forKey: key];
+            if ([event respondsToSelector: NSSelectorFromString(key)])
+            {
+                [event setValue: [eventDict objectForKey: key] forKey: key];
+            }
+            else
+            {
+                [[TCLogger sharedInstance] logMessage: [NSString stringWithFormat: @"EROOR : `%@` is not a property for TCCustomEvent", key] withLevel: TCLogLevel_Error];
+                return nil;
+            }
         }
     }
 
@@ -158,7 +190,15 @@
     {
         if (![[eventDict objectForKey: key] isEqual: [NSNull null]])
         {
-            [event setValue: [eventDict objectForKey: key] forKey: key];
+            if ([event respondsToSelector: NSSelectorFromString(key)])
+            {
+                [event setValue: [eventDict objectForKey: key] forKey: key];
+            }
+            else
+            {
+                [[TCLogger sharedInstance] logMessage: [NSString stringWithFormat: @"EROOR : `%@` is not a property for %@ !\n", key, cls] withLevel: TCLogLevel_Error];
+                return nil;
+            }
         }
     }
 
@@ -173,7 +213,15 @@
     {
         if (![[eventDict objectForKey: key] isEqual: [NSNull null]])
         {
-            [event setValue: [eventDict objectForKey: key] forKey: key];
+            if ([event respondsToSelector: NSSelectorFromString(key)])
+            {
+                [event setValue: [eventDict objectForKey: key] forKey: key];
+            }
+            else
+            {
+                [[TCLogger sharedInstance] logMessage: [NSString stringWithFormat: @"EROOR : `%@` is not a property for %@ !\n", key, cls] withLevel: TCLogLevel_Error];
+                return nil;
+            }
         }
     }
 

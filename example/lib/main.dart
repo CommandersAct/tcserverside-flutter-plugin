@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/services.dart';
-import 'package:tc_serverside_plugin/events/TCBeginCheckoutEvent.dart';
+import 'package:tc_serverside_plugin/TCApp.dart';
+import 'package:tc_serverside_plugin/TCDevice.dart';
+import 'package:tccore_plugin/TCUser.dart';
 import 'package:tc_serverside_plugin/events/TCPageViewEvent.dart';
 import 'package:tc_serverside_plugin/tc_serverside.dart';
-
+import 'package:tccore_plugin/TCDebug.dart';
 import 'MockEvents.dart';
 
 void main() {
@@ -41,31 +43,23 @@ class _MyAppState extends State<MyApp> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    buildTextButton('setDebugLevel : TCLogLevel_None', () => {TCDebug().setDebugLevel(TCLogLevel.TCLogLevel_None)}),
+                    buildTextButton('setDebugLevel : TCLogLevel_Verbose', () => {TCDebug().setDebugLevel(TCLogLevel.TCLogLevel_Verbose)}),
+                    buildTextButton('areHitBlocked ', () async => {print(await TCDebug().areHitBlocked())}),
+                    buildTextButton('blockHits ', () => {print(TCDebug().blockHits(true))}),
+                    buildTextButton('do not blockHits ', () => {print(TCDebug().blockHits(false))}),
+                    buildTextButton('enablePrettyFormat ', () => {print(TCDebug().enablePrettyFormat(true))}),
+                    buildTextButton('enableServerSide', () => {serverside.enableServerSide()}),
+                    buildTextButton('disableServerSide', () => {serverside.disableServerSide()}),
+                    buildTextButton('init TCServerSide', () => {serverside.initServerSide(3311, "source_key")} ),
+                    buildTextButton('PageViewEvent', () => {serverside.execute(MockEvents.makeMockTCPageViewEvent())}),
+                    buildTextButton('TCAddPaymentInfoEvent', () => {serverside.execute(MockEvents.makeMockTCAddPaymentInfoEvent())}),
                     buildTextButton('addPermanentData', () => {serverside.addPermanentData("permanant_data_key", "permanant_value")}),
                     buildTextButton('enableRunningInBackground', () => {serverside.enableRunningInBackground()}),
                     buildTextButton('getPermanentData', () async => {print(" *- permanant data = ${await serverside.getPermanentData("permanant_data_key")}")}),
                     buildTextButton('removePermanentData', () async => {print(" *- removed data = ${await serverside.removePermanentData("permanant_data_key")}")}),
                     buildTextButton('addAdvertisingID', () => {serverside.addAdvertisingID()}),
-                    buildTextButton('PageViewEvent', () => {serverside.execute(MockEvents.makeMockTCPageViewEvent())}),
-                    buildTextButton('TCPurchaseEvent', () => {serverside.execute(MockEvents.makeMockTCPurchaseEvent())}),
-                    buildTextButton('TCAddShippingInfoEvent', () => {serverside.execute(MockEvents.makeTCAddShippingInfoEvent())}),
-                    buildTextButton('TCAddPaymentInfoEvent', () => {serverside.execute(MockEvents.makeMockTCAddPaymentInfoEvent())}),
-                    buildTextButton('TCAddToCartEvent', () => {serverside.execute(MockEvents.makeMockTCAddToCartEvent())}),
-                    buildTextButton('TCAddToWishlistEvent', () => {serverside.execute(MockEvents.makeMockTCAddToWishlistEvent())}),
-                    buildTextButton('TCRefundEvent', () => {serverside.execute(MockEvents.makeMockTCRefundEvent())}),
-                    buildTextButton('TCRemoveFromCartEvent', () => {serverside.execute(MockEvents.makeMockTCRemoveFromCartEvent())}),
-                    buildTextButton('TCBeginCheckoutEvent', () => {serverside.execute(MockEvents.makeMockTCBeginCheckoutEvent())}),
-                    buildTextButton('TCViewCartEvent', () => {serverside.execute(MockEvents.makeMockTCViewCartEvent())}),
-                    buildTextButton('TCViewItem', () => {serverside.execute(MockEvents.makeMockTCViewItem())}),
-                    buildTextButton('TCCustomEvent', () => {serverside.execute(MockEvents.makeMockTCCustomEvent())}),
-                    buildTextButton('TCSelectContentEvent', () => {serverside.execute(MockEvents.makeMockTCSelectContentEvent())}),
-                    buildTextButton('TCSignUpEvent', () => {serverside.execute(MockEvents.makeMockTCSignUpEvent())}),
-                    buildTextButton('TCSearchEvent', () => {serverside.execute(MockEvents.makeMockTCSearchEvent())}),
-                    buildTextButton('TCLoginEvent', () => {serverside.execute(MockEvents.makeMockTCLoginEvent())}),
-                    buildTextButton('TCGenerateLeadEvent', () => {serverside.execute(MockEvents.makeMockTCGenerateLeadEvent())}),
-                    buildTextButton('TCSelectItemEvent', () => {serverside.execute(MockEvents.makeMockTCSelectItemEvent())}),
-                    buildTextButton('TCViewItemListEvent', () => {serverside.execute(MockEvents.makeMockTCViewItemListEvent())}),
-                      ],
+                  ],
                 ),
               )
           ),

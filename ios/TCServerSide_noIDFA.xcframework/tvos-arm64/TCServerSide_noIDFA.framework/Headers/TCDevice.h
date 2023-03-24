@@ -18,7 +18,7 @@
 
 SINGLETON_CLASS_H(TCDevice)
 
-@property (nonatomic, retain) NSString *ID;
+@property (nonatomic, retain) NSString *sdkID;
 @property (nonatomic, retain) NSString *manufacturer;
 @property (nonatomic, retain) NSString *model;
 @property (nonatomic, retain) NSString *name;

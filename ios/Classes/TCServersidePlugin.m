@@ -1,5 +1,6 @@
 #import "TCServersidePlugin.h"
 #import <TCCore/TCAdditionalProperties.h>
+#import <TCCore/TCUser.h>
 #import "TCEventParser.h"
 
 @interface TCServersidePlugin ()
@@ -36,12 +37,18 @@
     {
         ETCConsentBehaviour defaultBehavior = [self evaluateState: call.arguments[@"defaultBehavior"]];
         self.serverSide = [[ServerSide alloc] initWithSiteID: [call.arguments[@"site_id"] intValue] andSourceKey: call.arguments[@"source_key"] andDefaultBehaviour: defaultBehavior];
-        result(nil);
+        
+        result(@{@"device" : [[TCDevice sharedInstance] getJsonObject],
+                 @"app" : [[TCApp sharedInstance] getJsonObject],
+                 @"user" : [self getTCUser],});
     }
     else if ([@"execute" isEqualToString: call.method])
     {
         TCEvent *event = [self.parser parseEvent: call.arguments[@"event"] withName: call.arguments[@"name"]];
-        [self.serverSide execute: event];
+        if (event)
+        {
+            [self.serverSide execute: event];
+        }
         result(nil);
     }
     else if ([@"enableRunningInBackground" isEqualToString: call.method])
@@ -65,12 +72,39 @@
     else if ([@"addAdvertisingID" isEqualToString: call.method])
     {
         [self.serverSide addAdvertisingIDs];
+        result(@{@"device" : [[TCDevice sharedInstance] getJsonObject]});
+    }
+    else if ([@"setValue" isEqualToString: call.method])
+    {
+        [self.parser setValue: call.arguments[@"value"] forProperty: call.arguments[@"key"] forCalss: call.arguments[@"class"]];
+        result(nil);
+    }
+    else if ([@"addAdditionalProperty" isEqualToString: call.method])
+    {
+        [self.parser setAdditionalProperty: call.arguments[@"value"] forKey: call.arguments[@"key"] forCalss: call.arguments[@"class"] type: call.arguments[@"type"]];
+        result(nil);
+    }
+    else if ([@"disableServerSide" isEqualToString: call.method])
+    {
+        [self.serverSide disableServerSide];
+        result(nil);
+    }
+    else if ([@"enableServerSide" isEqualToString: call.method])
+    {
+        [self.serverSide enableServerSide];
         result(nil);
     }
     else
     {
         result(FlutterMethodNotImplemented);
     }
+}
+
+- (NSDictionary *) getTCUser
+{
+    NSMutableDictionary *tc_user = [[[TCUser sharedInstance] getJsonObject] mutableCopy];
+    [tc_user setValue: [TCUser sharedInstance].consentID forKey: @"consentID"];
+    return tc_user;
 }
 
 - (enum ETCConsentBehaviour) evaluateState: (NSString *) stringValue

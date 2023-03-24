@@ -4,6 +4,7 @@ import 'package:tc_serverside_plugin/events/TCItem.dart';
 
 class TCRemoveFromCartEvent extends TCECommerceEvent
 {
+
   double? value;
 
   TCRemoveFromCartEvent({List<TCItem>? items})

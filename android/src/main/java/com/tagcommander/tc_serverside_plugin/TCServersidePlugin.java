@@ -6,7 +6,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
-import com.tagcommander.lib.core.TCDebug;
+import com.google.gson.JsonObject;
+import com.tagcommander.lib.core.TCAdditionalProperties;
+import com.tagcommander.lib.core.TCLogger;
+import com.tagcommander.lib.core.TCUser;
 import com.tagcommander.lib.serverside.ETCConsentBehaviour;
 import com.tagcommander.lib.serverside.TCServerSide;
 import com.tagcommander.lib.serverside.events.TCAddPaymentInfoEvent;
@@ -29,6 +32,15 @@ import com.tagcommander.lib.serverside.events.TCSignUpEvent;
 import com.tagcommander.lib.serverside.events.TCViewCartEvent;
 import com.tagcommander.lib.serverside.events.TCViewItem;
 import com.tagcommander.lib.serverside.events.TCViewItemListEvent;
+import com.tagcommander.lib.serverside.schemas.TCApp;
+import com.tagcommander.lib.serverside.schemas.TCDevice;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.List;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
@@ -53,17 +65,22 @@ public class TCServersidePlugin implements FlutterPlugin, MethodCallHandler {
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "tc_serverside_flutter_plugin");
     channel.setMethodCallHandler(this);
     appContext = flutterPluginBinding.getApplicationContext();
-    TCDebug.setDebugLevel(Log.VERBOSE);
   }
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+    @SuppressWarnings("unchecked")
+    HashMap<String, Object> schemes =  new HashMap();
+
     switch (call.method)
     {
       case "initServerSide":
         ETCConsentBehaviour state = evaluateBehaviour(call.argument("defaultBehavior"));
         tcServerSide = new TCServerSide(call.argument("site_id"), call.argument("source_key"), appContext, state);
-        result.success(null);
+        schemes.put("device", TCDevice.getInstance().getJsonObject().toString());
+        schemes.put("app", TCApp.getInstance().getJsonObject().toString());
+        schemes.put("user", getTCUserJson());
+        result.success(schemes);
         break;
       case "execute":
         tcServerSide.execute(parseTCEvent(call.argument("name"), call.argument("event")));
@@ -85,12 +102,174 @@ public class TCServersidePlugin implements FlutterPlugin, MethodCallHandler {
         break;
       case "addAdvertisingID":
         tcServerSide.addAdvertisingID();
+        schemes.put("device", TCDevice.getInstance().getJsonObject().toString());
+        result.success(schemes);
+        break;
+      case "setValue":
+        setValue(call.argument("key"), call.argument("value"), call.argument("class"));
         result.success(null);
         break;
-        default:
+      case "addAdditionalProperty":
+        setAdditionalProperty(call.argument("key"), call.argument("value"), call.argument("class"), call.argument("type"));
+        result.success(null);
+        break;
+      case "removeAdditionalProperty":
+        removeAdditionalProperty(call.argument("key"), call.argument("class"));
+        result.success(null);
+        break;
+      case "clearAdditionalProperties":
+        clearAdditionalProperties(call.argument("class"));
+        result.success(null);
+        break;
+      case "disableServerSide":
+        tcServerSide.disableServerSide();
+        result.success(null);
+        break;
+      case "enableServerSide":
+        tcServerSide.enableServerSide();
+        result.success(null);
+        break;
+      default:
         result.notImplemented();
         break;
     }
+  }
+
+  private String getTCUserJson()
+  {
+    try
+    {
+        return TCUser.getInstance().getJsonObject().put("consentID", TCUser.getInstance().consentID).toString();
+    } catch (JSONException e)
+    {
+      e.printStackTrace();
+    }
+    return "";
+  }
+
+  private void removeAdditionalProperty(String key, String className)
+  {
+    TCAdditionalProperties obj = null;
+
+    switch (className)
+    {
+      case "TCDevice":
+        obj = TCDevice.getInstance();
+        break;
+      case "TCApp":
+        obj = TCApp.getInstance();
+        break;
+    }
+
+    if (obj != null && key != null)
+    {
+      obj.removeAdditionalProperty(key);
+    }
+  }
+
+  private void clearAdditionalProperties(String className)
+  {
+    TCAdditionalProperties obj = null;
+
+    switch (className)
+    {
+      case "TCDevice":
+        obj = TCDevice.getInstance();
+        break;
+      case "TCApp":
+        obj = TCApp.getInstance();
+        break;
+    }
+
+    if (obj != null )
+    {
+      obj.clearAdditionalProperties();
+    }
+  }
+
+  private void setAdditionalProperty(String key, Object value, String className, String type)
+  {
+    TCAdditionalProperties obj = null;
+    if (value != null)
+    {
+      switch (className)
+      {
+        case "TCDevice":
+          obj = TCDevice.getInstance();
+          break;
+        case "TCApp":
+          obj = TCApp.getInstance();
+          break;
+      }
+
+      if (obj != null)
+      {
+        switch (type)
+        {
+          case "string":
+            obj.addAdditionalProperty(key, (String) value);
+            break;
+          case "map":
+            obj.addAdditionalProperty(key, new JSONObject((HashMap) value));
+            break;
+          case "bool":
+            obj.addAdditionalProperty(key, (Boolean) value);
+            break;
+          case "double":
+            obj.addAdditionalProperty(key, ((Double) value).floatValue());
+            break;
+          case "int" :
+            obj.addAdditionalProperty(key, (Integer) value);
+            break;
+          case "list" :
+            obj.addAdditionalProperty(key, (List) value);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  private void setValue(String key, Object value, String className)
+  {
+      Object obj = null;
+
+      if (value != null)
+      {
+        Class<?> clazz = null;
+
+        if (className.equals("TCDevice"))
+        {
+          clazz = TCDevice.getInstance().getClass();
+          obj = TCDevice.getInstance();
+        }
+        else if(className.equals("TCApp"))
+        {
+          clazz = TCApp.getInstance().getClass();
+          obj = TCApp.getInstance();
+        }
+
+        while (clazz != null)
+        {
+          try
+          {
+            Field field = clazz.getDeclaredField(key);
+            field.setAccessible(true);
+            field.set(obj, value);
+            return;
+          }
+          catch (NoSuchFieldException e)
+          {
+            clazz = clazz.getSuperclass();
+          }
+          catch (Exception e)
+          {
+            TCLogger.getInstance().logMessage("Error while setting field for property {"+ key + "} with value {" + value +"}, :" + e.getMessage(), Log.ERROR);
+            return;
+          }
+        }
+      }
   }
 
   private ETCConsentBehaviour evaluateBehaviour(String defaultBehavior) {
