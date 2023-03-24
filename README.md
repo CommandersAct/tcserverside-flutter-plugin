@@ -31,7 +31,7 @@ Use branch `with_idfa` if you need IDFA in your ios hits.
 ```
 dependencies:
 
-  tc_consent_plugin:
+  tc_serverside_plugin:
     git:
       url: https://github.com/CommandersAct/tcserverside-plugin.git
       ref: with_idfa
@@ -61,4 +61,4 @@ An example code will look like :
   serverside.execute(TCPageViewEvent());
 ```
 
-A full example is available [Here](https://github.com/CommandersAct/TCMobileDemo-flutter) folder.
+A full example is available [Here](https://github.com/CommandersAct/TCMobileDemo-flutter).

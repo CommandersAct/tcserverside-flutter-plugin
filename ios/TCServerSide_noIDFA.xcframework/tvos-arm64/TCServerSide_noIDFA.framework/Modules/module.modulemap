@@ -1,6 +1,0 @@
-framework module TCServerSide_noIDFA {
-  umbrella header "TCServerSide_noIDFA.h"
-
-  export *
-  module * { export * }
-}
