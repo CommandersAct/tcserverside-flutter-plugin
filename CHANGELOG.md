@@ -3,6 +3,7 @@
 * Added more Serverside functionalities 
 * Added TCDevice, TCNetwork & TCApp
 * TCUser is moved inside a new trasitive TCCore dependency
+* new IDFA variant
 
 ## 0.0.1
 
