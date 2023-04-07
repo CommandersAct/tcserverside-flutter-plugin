@@ -1,3 +1,7 @@
+## 1.0.0
+
+* dependencies switched to cocoapods.
+
 ## 0.1.1
 
 * Added more Serverside functionalities 
