@@ -37,10 +37,6 @@ dependencies:
       ref: with_idfa
 ```
 
-### [iOS only] manually linking TCCore :
-
-Flutter doesn't currently fully support SPM dependency, you'll need to manually link our TCCore.xcframework to both your tc_* plugin target that you are using).
-
 ## Usage : 
 
 Simillar to Android and iOS SDKs, you'll need to create a ServerSide() instance and initialise it with your personal `siteID` and `source_key`.
