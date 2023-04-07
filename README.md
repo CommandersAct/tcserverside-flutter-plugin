@@ -41,10 +41,6 @@ dependencies:
 
 Flutter doesn't currently fully support SPM dependency, you'll need to manually link our TCCore.xcframework to both your tc_* plugin target that you are using).
 
-More info here :   
-
-[xcframework Linking](https://github.com/CommandersAct/TCMobileDemo-flutter/blob/master/xcframework_linking.md)
-
 ## Usage : 
 
 Simillar to Android and iOS SDKs, you'll need to create a ServerSide() instance and initialise it with your personal `siteID` and `source_key`.
