@@ -1,6 +1,0 @@
-framework module TCServerSide {
-  umbrella header "TCServerSide.h"
-
-  export *
-  module * { export * }
-}
