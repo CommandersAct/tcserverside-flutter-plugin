@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Bug fix on TCUser during ServerSide initialisation.
+
 ## 1.0.0
 
 * dependencies switched to cocoapods.

@@ -40,7 +40,7 @@
         
         result(@{@"device" : [[TCDevice sharedInstance] getJsonObject],
                  @"app" : [[TCApp sharedInstance] getJsonObject],
-                 @"user" : [self getTCUser],});
+                 @"user" : [self getTCUserDictionary],});
     }
     else if ([@"execute" isEqualToString: call.method])
     {
@@ -100,11 +100,16 @@
     }
 }
 
-- (NSDictionary *) getTCUser
+- (NSDictionary *) getTCUserDictionary
 {
-    NSMutableDictionary *tc_user = [[[TCUser sharedInstance] getJsonObject] mutableCopy];
-    [tc_user setValue: [TCUser sharedInstance].consentID forKey: @"consentID"];
-    return tc_user;
+    TCUser *user = [TCUser sharedInstance];
+    NSMutableDictionary *dict = [[user getJsonObject] mutableCopy];
+    [dict setValue: user.consentID forKey:@"consentID"];
+    [dict setValue: user.consent_vendors forKey:@"consent_vendors"];
+    [dict setValue: user.consent_categories forKey:@"consent_categories"];
+    [dict setValue: user.external_consent forKey:@"external_consent"];
+    
+    return dict;
 }
 
 - (enum ETCConsentBehaviour) evaluateState: (NSString *) stringValue
