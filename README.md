@@ -16,6 +16,7 @@ It is important to have a look on both [Android](https://github.com/CommandersAc
 We'll be releasing this plugin on pub.dev once beta phase is terminated. as for now, you'll need to set a git dependency. 
 
 On your pubspec.yaml, set : 
+replace `*.*.*` by the number of the latest version available here : [Releases](https://github.com/CommandersAct/tcserverside-flutter-plugin/releases)
 
 ```
 dependencies:
@@ -23,10 +24,10 @@ dependencies:
   tc_serverside_plugin:
     git:
       url: https://github.com/CommandersAct/tcserverside-plugin.git
-      ref: master
+      ref: *.*.*
 ```
 
-Use branch `with_idfa` if you need IDFA in your ios hits.
+Use `-idfa` releases if you need IDFA in your ios hits.
 
 ```
 dependencies:
@@ -34,7 +35,7 @@ dependencies:
   tc_serverside_plugin:
     git:
       url: https://github.com/CommandersAct/tcserverside-plugin.git
-      ref: with_idfa
+      ref: *.*.*-idfa
 ```
 
 ## Usage : 
