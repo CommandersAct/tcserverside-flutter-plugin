@@ -1,3 +1,7 @@
+## 1.0.2
+
+* update with latest TCServerSide.
+
 ## 1.0.1
 
 * Bug fix on TCUser during ServerSide initialisation.

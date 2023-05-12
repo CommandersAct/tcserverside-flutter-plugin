@@ -18,7 +18,7 @@ import com.tagcommander.lib.serverside.events.TCAddToCartEvent;
 import com.tagcommander.lib.serverside.events.TCAddToWishlistEvent;
 import com.tagcommander.lib.serverside.events.TCBeginCheckoutEvent;
 import com.tagcommander.lib.serverside.events.TCCustomEvent;
-import com.tagcommander.lib.serverside.events.TCEvent;
+import com.tagcommander.lib.serverside.events.base.TCEvent;
 import com.tagcommander.lib.serverside.events.TCGenerateLeadEvent;
 import com.tagcommander.lib.serverside.events.TCLoginEvent;
 import com.tagcommander.lib.serverside.events.TCPageViewEvent;
