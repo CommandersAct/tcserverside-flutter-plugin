@@ -1,6 +1,6 @@
-# /!\ Beta - TCServerSide Flutter plugin
+# TCServerSide Flutter plugin
 
-A beta version of Commanders Act's TCServerSide mobile lib
+Commanders Act's TCServerSide mobile lib
 
 ## Getting Started
 
