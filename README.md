@@ -35,6 +35,8 @@ dependencies:
       ref: *.*.*-idfa
 ```
 
+As it might lead to unforeseen behavior; please ensure that you configure Proguard correctly as outlined in the original documentation [here](https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard).
+
 ## Usage : 
 
 Simillar to Android and iOS SDKs, you'll need to create a ServerSide() instance and initialise it with your personal `siteID` and `source_key`.
