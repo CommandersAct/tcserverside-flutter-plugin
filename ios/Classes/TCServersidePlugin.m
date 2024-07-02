@@ -2,6 +2,8 @@
 #import <TCCore/TCAdditionalProperties.h>
 #import <TCCore/TCUser.h>
 #import "TCEventParser.h"
+#import "TCServerSideFlutterGenerated.h"
+#import <tccore_plugin/TCCoreFlutterGenerated.h>
 
 @interface TCServersidePlugin ()
 
@@ -41,6 +43,10 @@
         result(@{@"device" : [[TCDevice sharedInstance] getJsonObject],
                  @"app" : [[TCApp sharedInstance] getJsonObject],
                  @"user" : [self getTCUserDictionary],});
+        
+        [[TCApp sharedInstance] addAdditionalProperty: @"bridge" withStringValue: @"flutter"];
+        [[TCApp sharedInstance] addAdditionalProperty: @"tccore_flutter_plugin_version" withStringValue: TCCoreFlutterVersion];
+        [[TCApp sharedInstance] addAdditionalProperty: @"tcserverside_flutter_plugin_version" withStringValue: TCServerSideFlutterVersion];
     }
     else if ([@"execute" isEqualToString: call.method])
     {
