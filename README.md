@@ -35,7 +35,11 @@ dependencies:
       ref: *.*.*-idfa
 ```
 
-As it might lead to unforeseen behavior; please ensure that you configure Proguard correctly as outlined in the original documentation [here](https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard).
+### Proguard setup for android ⚠️ : 
+
+To prevent any unexpected issues, please make sure to configure Proguard correctly according to the guidelines provided in the original documentation.
+
+https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard.
 
 ## Usage : 
 
