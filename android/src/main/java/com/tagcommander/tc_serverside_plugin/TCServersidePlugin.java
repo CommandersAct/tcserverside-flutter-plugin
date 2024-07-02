@@ -7,10 +7,10 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.tagcommander.lib.core.ETCConsentBehaviour;
 import com.tagcommander.lib.core.TCAdditionalProperties;
 import com.tagcommander.lib.core.TCLogger;
 import com.tagcommander.lib.core.TCUser;
-import com.tagcommander.lib.serverside.ETCConsentBehaviour;
 import com.tagcommander.lib.serverside.TCServerSide;
 import com.tagcommander.lib.serverside.events.TCAddPaymentInfoEvent;
 import com.tagcommander.lib.serverside.events.TCAddShippingInfoEvent;
@@ -34,6 +34,7 @@ import com.tagcommander.lib.serverside.events.TCViewItem;
 import com.tagcommander.lib.serverside.events.TCViewItemListEvent;
 import com.tagcommander.lib.serverside.schemas.TCApp;
 import com.tagcommander.lib.serverside.schemas.TCDevice;
+import com.tagcommander.tccore_plugin.TCCoreFlutterGenerated;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,6 +81,10 @@ public class TCServersidePlugin implements FlutterPlugin, MethodCallHandler {
         schemes.put("device", TCDevice.getInstance().getJsonObject().toString());
         schemes.put("app", TCApp.getInstance().getJsonObject().toString());
         schemes.put("user", getTCUserJson());
+        TCApp.getInstance().addAdditionalProperty("bridge", "flutter");
+        TCApp.getInstance().addAdditionalProperty("tccore_flutter_plugin_version", TCCoreFlutterGenerated.version);
+        TCApp.getInstance().addAdditionalProperty("tcserverside_flutter_plugin_version", TCServerSideFlutterGenerated.version);
+
         result.success(schemes);
         break;
       case "execute":
