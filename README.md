@@ -34,8 +34,11 @@ dependencies:
       url: https://github.com/CommandersAct/tcserverside-plugin.git
       ref: *.*.*-idfa
 ```
+### Proguard setup for android ⚠️ : 
 
-As it might lead to unforeseen behavior; please ensure that you configure Proguard correctly as outlined in the original documentation [here](https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard).
+To prevent any unexpected issues, please make sure to configure Proguard correctly according to the guidelines provided in the original documentation.
+
+https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard.
 
 ## Usage : 
 
@@ -53,9 +56,10 @@ An example code will look like :
   serverside.execute(TCPageViewEvent());
 ```
 
-## Usage : 
+## Demo App : 
 
 A full example of a flutter application that implements the bridge is available in the following repository : 
+
 https://github.com/CommandersAct/TCMobileDemo-flutter.
 
 
