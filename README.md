@@ -35,6 +35,8 @@ dependencies:
       ref: *.*.*-idfa
 ```
 
+As it might lead to unforeseen behavior; please ensure that you configure Proguard correctly as outlined in the original documentation [here](https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard).
+
 ## Usage : 
 
 Simillar to Android and iOS SDKs, you'll need to create a ServerSide() instance and initialise it with your personal `siteID` and `source_key`.
@@ -51,4 +53,18 @@ An example code will look like :
   serverside.execute(TCPageViewEvent());
 ```
 
-A full example is available [Here](https://github.com/CommandersAct/TCMobileDemo-flutter) folder.
+## Usage : 
+
+A full example of a flutter application that implements the bridge is available in the following repository : 
+https://github.com/CommandersAct/TCMobileDemo-flutter.
+
+
+# Support & Contact : 
+
+Support : support@commandersact.com
+
+http://www.commandersact.com
+
+Commanders Act | 7b rue taylor - 75010 PARIS - France
+
+![Commanders Act logo](res/ca_logo.png)
