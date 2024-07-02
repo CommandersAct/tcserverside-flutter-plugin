@@ -57,9 +57,10 @@ An example code will look like :
   serverside.execute(TCPageViewEvent());
 ```
 
-## Usage : 
+## Demo App : 
 
 A full example of a flutter application that implements the bridge is available in the following repository : 
+
 https://github.com/CommandersAct/TCMobileDemo-flutter.
 
 
