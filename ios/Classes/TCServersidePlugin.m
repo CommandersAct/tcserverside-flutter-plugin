@@ -3,7 +3,6 @@
 #import <TCCore/TCUser.h>
 #import "TCEventParser.h"
 #import "TCServerSideFlutterGenerated.h"
-#import <tccore_plugin/TCCoreFlutterGenerated.h>
 
 @interface TCServersidePlugin ()
 
@@ -45,8 +44,8 @@
                  @"user" : [self getTCUserDictionary],});
         
         [[TCApp sharedInstance] addAdditionalProperty: @"bridge" withStringValue: @"flutter"];
-        [[TCApp sharedInstance] addAdditionalProperty: @"tccore_flutter_plugin_version" withStringValue: TCCoreFlutterVersion];
         [[TCApp sharedInstance] addAdditionalProperty: @"tcserverside_flutter_plugin_version" withStringValue: TCServerSideFlutterVersion];
+        // setting tccore_flutter_plugin_version impossible without manual linking, TCCorePlugin pod won't be accessible from TCServerSidePlugin on a demo app.
     }
     else if ([@"execute" isEqualToString: call.method])
     {
