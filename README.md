@@ -34,8 +34,8 @@ dependencies:
       url: https://github.com/CommandersAct/tcserverside-plugin.git
       ref: *.*.*-idfa
 ```
-
 ### Proguard setup for android ⚠️ : 
+
 
 To prevent any unexpected issues, please make sure to configure Proguard correctly according to the guidelines provided in the original documentation.
 
