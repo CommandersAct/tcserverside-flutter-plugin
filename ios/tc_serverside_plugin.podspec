@@ -17,7 +17,7 @@ A new Flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.dependency 'IOSV5-TCCore', '5.4.0'
-  s.dependency 'TCServerSide_noIDFA', '5.4.3'
+  s.dependency 'TCServerSide', '5.4.3'
   s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice.
