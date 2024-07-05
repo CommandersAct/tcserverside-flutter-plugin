@@ -4,6 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'tc_serverside_plugin'
+  s.version          = '1.1.2'
   s.version          = '1.1.0'
   s.summary          = 'A new Flutter plugin project.'
   s.description      = <<-DESC
@@ -16,7 +17,7 @@ A new Flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'IOSV5-TCCore', '5.3.4'
+  s.dependency 'IOSV5-TCCore', '5.4.0'
   s.dependency 'TCServerSide', '5.4.3'
   s.platform = :ios, '11.0'
 
