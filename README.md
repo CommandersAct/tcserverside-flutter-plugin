@@ -52,6 +52,7 @@ Please have a look on `lib/tc_serverside.dart`  & `example/lib/main.dart` for mo
 An example code will look like : 
 
 ```
+  TCDebug().setDebugLevel(TCLogLevel.TCLogLevel_Verbose);// optional but recommended to enable logs
   TCServerside serverside = TCServerside();
   serverside.initServerSide(3311, "sourceKey");
   serverside.execute(TCPageViewEvent());
