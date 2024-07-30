@@ -36,7 +36,6 @@ dependencies:
 ```
 ### Proguard setup for android ⚠️ : 
 
-
 To prevent any unexpected issues, please make sure to configure Proguard correctly according to the guidelines provided in the original documentation.
 
 https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard.
