@@ -4,8 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'tc_serverside_plugin'
-  s.version          = '1.1.2'
-  s.version          = '1.1.0'
+  s.version          = '1.1.3'
   s.summary          = 'A new Flutter plugin project.'
   s.description      = <<-DESC
 A new Flutter plugin project.
