@@ -26,13 +26,13 @@ android {
     namespace 'com.tagcommander.tc_serverside_plugin'
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     defaultConfig {
         compileSdk 35
-        minSdkVersion 17
+        minSdkVersion 21
     }
 }
 
