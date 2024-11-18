@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.android.tools.build:gradle:8.7.2'
     }
 }
 
@@ -23,21 +23,22 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    namespace 'com.tagcommander.tc_serverside_plugin'
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     defaultConfig {
-        minSdkVersion 17
+        compileSdk 35
+        minSdkVersion 21
     }
 }
 
 dependencies{
     //Commanders Act SDK dependencies
-    api 'com.tagcommander.lib:core:5.4.6'
-    api 'com.tagcommander.lib:ServerSide:5.5.6'
+    api 'com.tagcommander.lib:core:5.4.7'
+    api 'com.tagcommander.lib:ServerSide:5.5.8'
     api 'com.google.code.gson:gson:2.10.1'
 }
