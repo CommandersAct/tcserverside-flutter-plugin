@@ -23,7 +23,9 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdk 35
+    namespace 'com.tagcommander.tc_serverside_plugin'
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -31,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 17
+        minSdkVersion 21
     }
 }
 
