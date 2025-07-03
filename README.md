@@ -34,8 +34,11 @@ dependencies:
       url: https://github.com/CommandersAct/tcserverside-plugin.git
       ref: *.*.*-idfa
 ```
+### Proguard setup for android ⚠️ : 
 
-As it might lead to unforeseen behavior; please ensure that you configure Proguard correctly as outlined in the original documentation [here](https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard).
+To prevent any unexpected issues, please make sure to configure Proguard correctly according to the guidelines provided in the original documentation.
+
+https://github.com/CommandersAct/AndroidV5/tree/master/TCCore#using-proguard.
 
 ## Usage : 
 
@@ -48,6 +51,7 @@ Please have a look on `lib/tc_serverside.dart`  & `example/lib/main.dart` for mo
 An example code will look like : 
 
 ```
+  TCDebug().setDebugLevel(TCLogLevel.TCLogLevel_Verbose);// optional but recommended to enable logs
   TCServerside serverside = TCServerside();
   serverside.initServerSide(3311, "sourceKey");
   serverside.execute(TCPageViewEvent());
@@ -62,6 +66,7 @@ If you need to forward your events to firebase, please check the following docum
 ## Demo App : 
 
 A full example of a flutter application that implements the bridge is available in the following repository : 
+
 https://github.com/CommandersAct/TCMobileDemo-flutter.
 
 
