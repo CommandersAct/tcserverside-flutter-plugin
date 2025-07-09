@@ -1,14 +1,14 @@
 PODS:
   - Flutter (1.0.0)
-  - IOSV5-TCCore (5.4.0)
-  - tc_serverside_plugin (1.1.1):
+  - IOSV5-TCCore (5.4.2)
+  - tc_serverside_plugin (1.2.2):
     - Flutter
-    - IOSV5-TCCore (= 5.4.0)
-    - TCServerSide_noIDFA (= 5.4.3)
-  - tccore_plugin (1.2.2):
+    - IOSV5-TCCore (= 5.4.2)
+    - TCServerSide_noIDFA (= 5.4.5)
+  - tccore_plugin (1.3.1):
     - Flutter
-    - IOSV5-TCCore (= 5.4.0)
-  - TCServerSide_noIDFA (5.4.3)
+    - IOSV5-TCCore (= 5.4.2)
+  - TCServerSide_noIDFA (5.4.5)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -30,11 +30,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  IOSV5-TCCore: c8553e0df90cab10cc8bc4aa8c37baea452021b0
-  tc_serverside_plugin: 937e8f6c3d5fbabf3a683a71ef6abd3eefccc196
-  tccore_plugin: 6ffd0eb11e6fcec6e96e1a6c721a6327a31248cd
-  TCServerSide_noIDFA: 86a8ed5685a937190bbd0f8657834864eeaf6886
+  IOSV5-TCCore: 7bc1f71a8732c3d42cb9cbdad2f7ca2bbe730483
+  tc_serverside_plugin: 3a92eb9e90b9644768e9deb12727ab7e69d0fa4d
+  tccore_plugin: af190437c3642314acd1c3156fb1d9c985ee2780
+  TCServerSide_noIDFA: 3ecff545cf26411ea5d13e6a47d967dd1426b640
 
 PODFILE CHECKSUM: cf0c950f7e9a456b4e325f5b8fc0f98906a3705a
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

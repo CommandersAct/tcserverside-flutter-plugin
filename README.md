@@ -56,6 +56,12 @@ An example code will look like :
   serverside.execute(TCPageViewEvent());
 ```
 
+## Firebase Destination : 
+
+If you need to forward your events to firebase, please check the following documentation : 
+
+[See the detailed guide](./res/firebase_events_forward.md)
+
 ## Demo App : 
 
 A full example of a flutter application that implements the bridge is available in the following repository : 
