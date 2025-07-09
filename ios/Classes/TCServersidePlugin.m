@@ -31,13 +31,38 @@
     [registrar addMethodCallDelegate: instance channel: instance.channel];
 }
 
+- (id) checkFirebaseInstance
+{
+    id appDelegate = [UIApplication sharedApplication].delegate;
+
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    if ([appDelegate respondsToSelector:@selector(getFirebaseAnalyticsInstace)])
+    {
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        NSLog(@"initializing TCServerSide with Firebase");
+        return [appDelegate performSelector:@selector(getFirebaseAnalyticsInstace)];
+    }
+    else
+    {
+        NSLog(@"Initializing TCServerSide without Firebase instance.");
+        return nil;
+    }
+}
 
 - (void) handleMethodCall: (FlutterMethodCall*) call result: (FlutterResult) result
 {
     if ([@"initServerSide" isEqualToString: call.method])
     {
+        id firebaseInstance = [self checkFirebaseInstance];
         ETCConsentBehaviour defaultBehavior = [self evaluateState: call.arguments[@"defaultBehavior"]];
-        self.serverSide = [[ServerSide alloc] initWithSiteID: [call.arguments[@"site_id"] intValue] andSourceKey: call.arguments[@"source_key"] andDefaultBehaviour: defaultBehavior];
+        if (firebaseInstance != nil)
+        {
+            self.serverSide = [[ServerSide alloc] initWithSiteID: [call.arguments[@"site_id"] intValue] andSourceKey: call.arguments[@"source_key"] andDefaultBehaviour: defaultBehavior andFirebaseInstance: firebaseInstance];
+        }
+        else
+        {
+            self.serverSide = [[ServerSide alloc] initWithSiteID: [call.arguments[@"site_id"] intValue] andSourceKey: call.arguments[@"source_key"] andDefaultBehaviour: defaultBehavior];
+        }
         
         result(@{@"device" : [[TCDevice sharedInstance] getJsonObject],
                  @"app" : [[TCApp sharedInstance] getJsonObject],

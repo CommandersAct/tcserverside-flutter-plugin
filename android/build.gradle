@@ -1,5 +1,5 @@
 group 'com.tagcommander.tc_serverside_plugin'
-version '1.0'
+version '1.2.2'
 
 buildscript {
     repositories {
