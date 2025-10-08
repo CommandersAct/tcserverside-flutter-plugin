@@ -1,3 +1,9 @@
+## 1.2.4
+
+* ~ Binaries dependencies leak fix. 
+* ~ changing the library used for getting android ID from androidx.ads to play-services-ads.
+* ~ upgrading target version to api 35.
+
 ## 1.0.2
 
 * update with latest TCServerSide.
