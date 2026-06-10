@@ -1,3 +1,7 @@
+## 1.2.5
+
+* iOS Pods updated.
+
 ## 1.2.4
 
 * ~ Binaries dependencies leak fix. 
