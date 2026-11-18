@@ -1,4 +1,4 @@
-#import "TCServersidePlugin.h"
+#import "./include/tc_serverside_plugin/TCServersidePlugin.h"
 #import <TCCore/TCAdditionalProperties.h>
 #import <TCCore/TCUser.h>
 #import "TCEventParser.h"

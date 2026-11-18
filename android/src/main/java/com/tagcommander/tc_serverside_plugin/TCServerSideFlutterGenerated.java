@@ -6,5 +6,5 @@ package com.tagcommander.tc_serverside_plugin;
 
 public class TCServerSideFlutterGenerated
 {
-    public static final String version = "1.2.5";
+    public static final String version = "1.3.0-beta.8";
 }
