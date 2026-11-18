@@ -5,4 +5,4 @@
 #import <Foundation/Foundation.h>
 #import "TCServerSideFlutterGenerated.h"
 
-NSString *const TCServerSideFlutterVersion = @"1.2.5";
+NSString *const TCServerSideFlutterVersion = @"1.3.0";
